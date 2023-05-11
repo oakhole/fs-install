@@ -22,7 +22,14 @@ ulimit -l unlimited
 
 #### 防火墙配置
 
-`SIP/RTP` 端口。
+```shell
+# 关闭 ipables 服务
+systemctl stop iptables.service
+systemctl disable iptables.service
+```
+
+`SIP端口`: 5060 / 5080
+`RTP端口`: 16384 - 32768
 
 #### 网络配置
 
@@ -35,59 +42,13 @@ ulimit -l unlimited
 使用 fusionpbx 脚本安装 Freeswitch。
 
 ```shell
-# !/bin/bash
-# Update CentOS
-echo "Updating CentOS"
-yum -y update && yum -y upgrade
-
-# Add additional repository
-yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
-
-# Installing dependencies
-yum -y install git ntp yum-utils net-tools epel-release htop vim openssl memcached curl gdb
-
-#get the install script
-cd /usr/src && git clone https://ghproxy.com/https://github.com/fusionpbx/fusionpbx-install.sh.git
-
-#change the working directory
-cd /usr/src/fusionpbx-install.sh/centos
-
-# Disable SELinux
-resources/selinux.sh
-
-#FreeSWITCH
-#send a message
-echo "Installing FreeSWITCH"
-
-#install freeswitch packages
-yum install -y freeswitch-release-repo-0-1.noarch.rpm epel-release
-yum install -y freeswitch-config-vanilla freeswitch-lang-* freeswitch-lua freeswitch-xml-cdr
-
-#update the permissions
-chown -R freeswitch.daemon /etc/freeswitch /var/lib/freeswitch /var/log/freeswitch /usr/share/freeswitch /var/www/fusionpbx
-find /etc/freeswitch -type d -exec chmod 770 {} \;
-find /var/lib/freeswitch -type d -exec chmod 770 {} \;
-find /var/log/freeswitch -type d -exec chmod 770 {} \;
-find /usr/share/freeswitch -type d -exec chmod 770 {} \;
-find /etc/freeswitch -type f -exec chmod 664 {} \;
-find /var/lib/freeswitch -type f -exec chmod 664 {} \;
-find /var/log/freeswitch -type f -exec chmod 664 {} \;
-find /usr/share/freeswitch -type f -exec chmod 664 {} \;
-
-#restart services
-echo "Restarting packages for final configuration"
-systemctl daemon-reload
-systemctl enable freeswitch
-systemctl restart freeswitch
-
-#send a message
-echo "FreeSWITCH installed"
-
-#install sngrep
-resources/sngrep.sh
+git clone https://gitee.com/oakhole/fs-install.git && cd fs-install & chmod +x install.sh
+install.sh
 ```
 
-### FS 环境
+开启 `sngrep` 监控 sip 消息，使用 sip 客户端登录用户 `1000、1001` 到 `IP:5060` 的 sip 消息并相互呼叫验证服务是否可用。
+
+### FS 服务配置
 
 #### 建议配置
 

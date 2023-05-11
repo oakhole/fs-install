@@ -19,15 +19,16 @@ yum -y update && yum -y upgrade
 
 # Add additional repository
 yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
+yum install -y freeswitch-release-repo-0-1.noarch.rpm epel-release
 
 # Installing dependencies
 yum -y install git ntp yum-utils net-tools epel-release htop vim openssl memcached curl gdb
 
 #get the install script
-cd /usr/src && git clone https://ghproxy.com/https://github.com/fusionpbx/fusionpbx-install.sh.git
+git clone https://ghproxy.com/https://github.com/fusionpbx/fusionpbx-install.sh.git
 
 #change the working directory
-cd /usr/src/fusionpbx-install.sh/centos
+cd ./fusionpbx-install.sh/centos
 
 # Disable SELinux
 resources/selinux.sh
@@ -37,7 +38,6 @@ resources/selinux.sh
 echo "Installing FreeSWITCH"
 
 #install freeswitch packages
-yum install -y freeswitch-release-repo-0-1.noarch.rpm epel-release
 yum install -y freeswitch-config-vanilla freeswitch-lang-* freeswitch-lua freeswitch-xml-cdr
 
 #update the permissions
