@@ -20,6 +20,8 @@ yum -y update && yum -y upgrade
 # Add additional repository
 yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 yum install -y freeswitch-release-repo-0-1.noarch.rpm epel-release
+echo "oakhole" >/etc/yum/vars/signalwireusername
+echo "pat_QAQRREtCTSA4vhanF15Rn3t7" >/etc/yum/vars/signalwiretoken
 
 # Installing dependencies
 yum -y install git ntp yum-utils net-tools epel-release htop vim openssl memcached curl gdb

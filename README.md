@@ -41,8 +41,12 @@ systemctl disable iptables.service
 
 使用 fusionpbx 脚本安装 Freeswitch。
 
+- **前置条件**
+  配置``
+
 ```shell
-git clone https://gitee.com/oakhole/fs-install.git && cd fs-install & chmod +x install.sh
+yum install -y git
+git clone https://gitee.com/oakhole/fs-install.git && cd fs-install && chmod +x install.sh
 install.sh
 ```
 
@@ -81,6 +85,18 @@ install.sh
 
   ```xml
   <!-- switch.conf.xml -->
+  ```
+
+- ACL
+
+  ```xml
+
+  ```
+
+- 落地网关
+
+  ```xml
+
   ```
 
 #### 优化配置（选择性）
