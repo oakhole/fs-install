@@ -67,7 +67,7 @@ ldconfig
 
 # --------------------------------- 7. 安装 ffmpeg -------------------------------- #
 cd /usr/local/src
-wget -O ffmpeg.tar.gz https://ffmpeg.org/releases/ffmpeg-5.1.3.tar.gz
+wget -O ffmpeg-5.1.3.tar.gz https://ffmpeg.org/releases/ffmpeg-5.1.3.tar.gz
 tar zxvf ffmpeg-5.1.3.tar.gz
 mv ffmpeg-5.1.3 ffmpeg
 cd ffmpeg
