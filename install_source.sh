@@ -103,3 +103,11 @@ make -j cd-moh-install
 # ---------------------------- 9. 变更 freeswitch 默认配置 ---------------------------- #
 rm -rf /etc/freeswitch/sip_profiles/external-ipv6 /etc/freeswitch/sip_profiles/external-ipv6.xml /etc/freeswitch/sip_profiles/internal-ipv6.xml
 # 更改 vars.xml 默认密码
+
+# ---------------------------- 安装 sip 抓包工具 sngrep ---------------------------- #
+IRONTEC="[irontec]
+name=Irontec RPMs repository
+baseurl=http://packages.irontec.com/centos/\$releasever/\$basearch/"
+echo "${IRONTEC}" >/etc/yum.repos.d/irontec.repo
+rpm --import http://packages.irontec.com/public.key
+yum -y install sngrep
