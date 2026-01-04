@@ -27,7 +27,7 @@ echo "pat_QAQRREtCTSA4vhanF15Rn3t7" >/etc/yum/vars/signalwiretoken
 yum -y install git ntp yum-utils net-tools epel-release htop vim openssl memcached curl gdb
 
 #get the install script
-git clone https://ghproxy.com/https://github.com/fusionpbx/fusionpbx-install.sh.git
+git clone https://ghfast.top/https://github.com/fusionpbx/fusionpbx-install.sh.git
 
 #change the working directory
 cd ./fusionpbx-install.sh/centos
