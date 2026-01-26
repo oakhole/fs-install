@@ -1,0 +1,12 @@
+<include>
+    <gateway name="vos">
+        <!-- 落地网关的 ip 和端口 -->
+        <param name="realm" value="183.213.19.195:50400" />
+        <!-- 是否注册 -->
+        <param name="register" value="false" />
+        <!-- 透传主叫号码 -->
+        <param name="caller-id-in-from" value="true" />
+        <!-- 配置客户端设备名称 -->
+        <param name="user-agent-string" value="fs-6" />
+    </gateway>
+</include>

@@ -1,0 +1,12 @@
+[Unit]
+Description=FreeSWITCH
+After=syslog.target network.target
+
+[Service]
+User=freeswitch
+ExecStart=/usr/bin/freeswitch -nc -nf -nonat
+Restart=on-failure
+ExecReload=/usr/bin/kill -HUP $MAINPID
+
+[Install]
+WantedBy=multi-user.target

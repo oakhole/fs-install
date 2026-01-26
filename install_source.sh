@@ -32,9 +32,7 @@ yum install -y https://$(</etc/yum/vars/signalwireusername):$(</etc/yum/vars/sig
 
 # ------------------------ 2. 安装 devtoolset-9，解决依赖找不到的问题 ------------------------ #
 cd /usr/local/src
-yum -y --downloadonly --downloaddir=./gccupdate install centos-release-scl
-cd gccupdate
-rpm -ivh ./*
+wget -O /etc/yum.repos.d/devtoolset-9.repo https://copr.fedorainfracloud.org/coprs/mayeut/devtoolset-9/repo/custom-1/mayeut-devtoolset-9-custom-1.repo --no-check-certificate
 yum -y --downloadonly --downloaddir=./gcc9 install devtoolset-9
 cd gcc9
 rpm -Uvh ./*
@@ -86,7 +84,7 @@ tar zxvf freeswitch-1.10.10.tar.gz
 mv freeswitch-1.10.10 freeswitch
 cd freeswitch
 ./bootstrap.sh -j
-./configure --enable-portable-binary --prefix=/usr --localstatedir=/var --sysconfdir=/etc --with-gnu-ld --with-python --with-erlang --with-openssl --enable-core-odbc-support
+./configure --enable-portable-binary --prefix=/usr --localstatedir=/var --sysconfdir=/etc --with-gnu-ld --with-python --with-erlang --with-openssl --enable-core-odbc-support --enable-zrtp --enable-system-lua 
 
 # 更改 mod_av 编译文件
 echo 'AV=/usr/local/ffmpeg' >/usr/local/src/freeswitch/src/mod/applications/mod_av/Makefile
