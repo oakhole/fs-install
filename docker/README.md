@@ -1,8 +1,8 @@
 # Docker - FreeSWITCH 容器化部署
 
-本目录包含 FreeSWITCH 的 Docker 容器化配置和构建文件。
+本目录包含 FreeSWITCH 的 Docker 容器化配置和构建文件。 通过该配置，可以快速构建并运行一个基于 CentOS 7 的 FreeSWITCH 实例，适用于生产环境和测试环境。
 
-## 一键安装脚本
+## 快速安装
 
 ```bash
 curl -o- https://gitee.com/oakhole/fs-install/raw/main/docker/install.sh | bash

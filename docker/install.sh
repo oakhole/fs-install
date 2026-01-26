@@ -23,8 +23,8 @@ rm -rf /etc/yum.repos.d/* && \
 yum install -y ldns libsndfile opus libks2 ntpdate && ntpdate cn.pool.ntp.org
 
 # 下载并解压编译好的freeswitch及其依赖库
-curl -o /build.tar.gz https://raw.githubusercontent.com/oakhole/fs-install/refs/heads/main/docker/build/build.tar.gz && cd / \
-&& tar zxvf build.tar.gz && rm -rf build.tar.gz \
+curl -o /fs.tgz http://t9h8k8i48.hd-bkt.clouddn.com/fs.tgz && cd / \
+&& tar zxvf fs.tgz && rm -rf fs.tgz \
 && tar xvf libs.tar && rm -rf libs.tar
 
 # 创建freeswitch用户和用户组
@@ -34,4 +34,5 @@ groupadd -g 499 freeswitch \
 # freeswitch 加载systemd服务开机自启
 systemctl daemon-reload && systemctl start freeswitch && systemctl enable freeswitch
 
-# docker run -it --net=host --cap-add SYS_NICE --privileged=true --name fs-test -v /Users/oakhole/Projects/fs-install/docker/build:/build centos:centos7.9.2009
+# fs_cli 查询当前状态
+fs_cli -x "status"
