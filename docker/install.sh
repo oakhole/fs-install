@@ -32,7 +32,12 @@ groupadd -g 499 freeswitch \
     && useradd -u 499 -g freeswitch freeswitch
 
 # freeswitch 加载systemd服务开机自启
-systemctl daemon-reload && systemctl start freeswitch && systemctl enable freeswitch
+echo "/usr/bin/freeswitch -nc -nonat" >> /etc/rc.d/rc.local && chmod +x /etc/rc.d/rc.local
 
-# fs_cli 查询当前状态
-fs_cli -x "status"
+# 启动 freeswitch
+/usr/bin/freeswitch -nc -nonat
+
+echo "Freeswitch 安装完成。"
+
+# 验证 freeswitch 是否启动成功
+fs_cli -RrS
