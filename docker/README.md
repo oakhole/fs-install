@@ -2,6 +2,12 @@
 
 本目录包含 FreeSWITCH 的 Docker 容器化配置和构建文件。
 
+## 一键安装脚本
+
+```bash
+curl -o- https://gitee.com/oakhole/fs-install/raw/main/docker/install.sh | bash
+```
+
 ## 目录结构
 
 ```

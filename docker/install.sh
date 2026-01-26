@@ -23,7 +23,7 @@ rm -rf /etc/yum.repos.d/* && \
 yum install -y ldns libsndfile opus libks2 ntpdate && ntpdate cn.pool.ntp.org
 
 # 下载并解压编译好的freeswitch及其依赖库
-curl -o /build.tar.gz https://gitee.com/oakhole/fs-install/raw/main/docker/build/build.tar.gz && cd / \
+curl -o /build.tar.gz https://raw.githubusercontent.com/oakhole/fs-install/refs/heads/main/docker/build/build.tar.gz && cd / \
 && tar zxvf build.tar.gz && rm -rf build.tar.gz \
 && tar xvf libs.tar && rm -rf libs.tar
 
