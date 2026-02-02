@@ -3,7 +3,7 @@
 # Enable strict error handling:
 # -e: Exit immediately if any command exits with a non-zero status
 # -u: Exit if an undefined variable is referenced
-set -euo
+set -eux
 
 # 设置系统ulimit参数
 ulimit -c unlimited -d unlimited -f unlimited -i unlimited -n 999999 -q unlimited -u unlimited -v unlimited -x unlimited -s 240 -l unlimited
