@@ -15,14 +15,16 @@
     <!-- <load module="mod_xml_cdr"/> -->
 
     <!-- Event Handlers -->
-    <load module="mod_cdr_csv" />
+    <load
+      module="mod_cdr_csv" />
     <!-- <load module="mod_event_multicast"/> -->
     <load module="mod_event_socket" />
 
     <!-- Endpoints -->
     <!-- <load module="mod_iax"/> -->
     <load module="mod_sofia" />
-    <load module="mod_loopback" />
+    <load
+      module="mod_loopback" />
     <!-- <load module="mod_woomera"/> -->
 
     <!-- Applications -->
@@ -30,7 +32,8 @@
     module="mod_signalwire"/-->
     <load module="mod_commands" />
     <load module="mod_dptools" />
-    <load module="mod_expr" />
+    <load
+      module="mod_expr" />
     <!--<load
     module="mod_translate"/>-->
 
@@ -39,7 +42,8 @@
 
     <!-- Codec Interfaces -->
     <load module="mod_spandsp" />
-    <load module="mod_g723_1" />
+    <load
+      module="mod_g723_1" />
     <load module="mod_g729" />
     <load module="mod_amr" />
     <!--<load
@@ -48,7 +52,13 @@
     <!--<load
     module="mod_siren"/>-->
 
-    <!-- Timers -->
+    <!-- File Format Interfaces -->
+    <load
+      module="mod_sndfile" />
+    <load module="mod_native_file" />
+    <load module="mod_local_stream" />
+    <load
+      module="mod_tone_stream" />G <!-- Timers -->
 
     <!-- Languages -->
     <!-- <load module="mod_perl"/> -->
