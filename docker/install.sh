@@ -20,12 +20,17 @@ rm -rf /etc/yum.repos.d/* && \
     && yum clean all && yum makecache
 
 # freeswitch runime dependencies
-yum install -y ldns libsndfile opus libks2 ntpdate && ntpdate cn.pool.ntp.org
+yum install -y git ldns libsndfile opus libks2 ntpdate && ntpdate cn.pool.ntp.org
 
 # 下载并解压编译好的freeswitch及其依赖库
-curl -o /fs.tgz http://t9h8k8i48.hd-bkt.clouddn.com/fs.tgz && cd / \
+cd ~/ \
+git clone https://gitee.com/oakhole/fs-install.git \
+&& cd fs-install \
+&& mv docker/fs.tgz / \
+&& cd / \
 && tar zxvf fs.tgz && rm -rf fs.tgz \
-&& tar xvf libs.tar && rm -rf libs.tar
+&& tar xvf libs.tar && rm -rf libs.tar \
+&& rm -rf ~/fs-install
 
 # 创建freeswitch用户和用户组
 groupadd -g 499 freeswitch \
