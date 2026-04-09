@@ -18,5 +18,5 @@ docker run --rm \
     --net=host \
     --cap-add SYS_NICE \
     -v ./:/build \
-    freeswitch:v1.10.12 \
+    freeswitch:${FREESWITCH_VERSION} \
     /bin/bash -c "mv /build.tar.gz /build/fs.tgz"

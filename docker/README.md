@@ -10,7 +10,7 @@ curl -o- https://gitee.com/oakhole/fs-install/raw/main/docker/install.sh | bash
 
 ## 目录结构
 
-```
+```plain
 docker/
 ├── README.md              # 本文件，项目文档
 ├── Dockerfile             # Docker 镜像构建文件
@@ -54,16 +54,16 @@ docker/
 **构建阶段:**
 
 - **builder-freeswitch**: 编译 FreeSWITCH 和 Sofia-SIP 依赖库
-    - 配置阿里云源以加速依赖下载
-    - 安装编译工具链（devtoolset-4）和各类开发库
-    - 克隆 FreeSWITCH (v1.10.12) 和 Sofia-SIP (v1.13.17) 源码
-    - 应用补丁文件
-    - 编译并生成二进制文件和库
+  - 配置阿里云源以加速依赖下载
+  - 安装编译工具链（devtoolset-4）和各类开发库
+  - 克隆 FreeSWITCH (v1.10.12) 和 Sofia-SIP (v1.13.17) 源码
+  - 应用补丁文件
+  - 编译并生成二进制文件和库
 
 - **runner**: 运行环境镜像
-    - 基于 CentOS 7.9.2009
-    - 包含 FreeSWITCH 运行时依赖
-    - 集成所有编译好的二进制文件
+  - 基于 CentOS 7.9.2009
+  - 包含 FreeSWITCH 运行时依赖
+  - 集成所有编译好的二进制文件
 
 ### install.sh
 
@@ -97,24 +97,24 @@ docker/
 构建过程生成的文件和配置目录，包含：
 
 - **etc/freeswitch/**: FreeSWITCH 核心配置文件
-    - `freeswitch.xml`: 主配置文件，定义模块加载和系统参数
-    - `autoload_configs/`: 各功能模块配置（ACL、CDR、事件、SIP 等）
-    - `dialplan/`: 拨号计划（default、features、public）
-    - `sbc_profiles/`: SBC（会话边界控制器）配置
+  - `freeswitch.xml`: 主配置文件，定义模块加载和系统参数
+  - `autoload_configs/`: 各功能模块配置（ACL、CDR、事件、SIP 等）
+  - `dialplan/`: 拨号计划（default、features、public）
+  - `sbc_profiles/`: SBC（会话边界控制器）配置
 
 - **usr/bin/**: 可执行命令
-    - `freeswitch`: FreeSWITCH 主程序
-    - `fs_cli`: FreeSWITCH 命令行客户端
-    - 其他工具：fs_encode、fs_ivrd、fs_tts 等
+  - `freeswitch`: FreeSWITCH 主程序
+  - `fs_cli`: FreeSWITCH 命令行客户端
+  - 其他工具：fs_encode、fs_ivrd、fs_tts 等
 
 - **usr/lib/**: FreeSWITCH 模块和依赖库
-    - `libfreeswitch.so.1.0.0`: 主库文件
-    - `freeswitch/mod/`: 功能模块
+  - `libfreeswitch.so.1.0.0`: 主库文件
+  - `freeswitch/mod/`: 功能模块
 
 - **var/**: 运行时数据目录
-    - `lib/freeswitch/`: 数据存储目录
-    - `log/freeswitch/`: 日志目录
-    - `run/freeswitch/`: PID 和 Socket 目录
+  - `lib/freeswitch/`: 数据存储目录
+  - `log/freeswitch/`: 日志目录
+  - `run/freeswitch/`: PID 和 Socket 目录
 
 ## patches/ 目录
 
@@ -206,6 +206,36 @@ reloadxml                 # 重新加载配置
 
 ## 维护和支持
 
-- FreeSWITCH 官网: https://freeswitch.org
-- 项目仓库: https://github.com/signalwire/freeswitch
-- Sofia-SIP: https://github.com/freeswitch/sofia-sip
+- FreeSWITCH 官网: <https://freeswitch.org>
+- 项目仓库: <https://github.com/signalwire/freeswitch>
+- Sofia-SIP: <https://github.com/freeswitch/sofia-sip>
+- 开源引用: <https://github.com/PatrickBaus/freeswitch-docker>
+
+### 示例：运行 GitHub 开源 FreeSWITCH Docker 镜像
+
+如果你希望直接使用社区维护的 FreeSWITCH 镜像，可以参考以下命令：
+
+```shell
+#  -d：后台运行容器
+# --net=host：使用主机网络（适用于 SIP/RTP）
+# --cap-add SYS_NICE：允许容器设置更高的进程优先级
+# -v $(pwd)/configuration:/etc/freeswitch：挂载本地配置目录到容器内
+
+# 开源 FreeSWITCH Docker 镜像
+docker run -d \
+    --net=host \
+    --cap-add SYS_NICE \
+    -v /etc/freeswitch:/etc/freeswitch \
+    -v /home/freeswitch/log:/home/freeswitch/log \
+    -v /home/records:/home/records \
+    ghcr.io/patrickbaus/freeswitch-docker
+
+# 本地构建的 FreeSWITCH Docker 镜像
+docker run -d \
+    --net=host \
+    --cap-add SYS_NICE \
+    -v ~/.fs/conf:/etc/freeswitch \
+    -v ~/.fs/log:/var/log/freeswitch \
+    --name fs-instance \
+    freeswitch:v1.10.12
+```

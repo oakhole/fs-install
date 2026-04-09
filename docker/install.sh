@@ -10,6 +10,8 @@ ulimit -c unlimited -d unlimited -f unlimited -i unlimited -n 999999 -q unlimite
 
 # 关闭selinux及防火墙
 setenforce 0 && systemctl stop firewalld && systemctl disable firewalld
+# 永久关闭 selinux
+sed -i 's/SELINUX=enforcing/SELINUX=disabled/' /etc/selinux/config
 
 # 配置阿里云yum源及signalwire freeswitch源
 rm -rf /etc/yum.repos.d/* && \

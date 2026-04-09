@@ -1,5 +1,5 @@
 # 基础镜像
-FROM centos:7.9.2009 AS base
+FROM centos:7.6.1810 AS base
 
 ARG FREESWITCH_VERSION="v1.10.12"
 ARG SOFIA_VERSION="v1.13.17"
@@ -105,7 +105,7 @@ RUN wget -O /etc/yum.repos.d/devtoolset-4.repo \
     https://copr.fedoraproject.org/coprs/hhorak/devtoolset-4-rebuild-bootstrap/repo/epel-7/hhorak-devtoolset-4-rebuild-bootstrap-epel-7.repo \
     --no-check-certificate && \
     yum update -y && \
-    yum install -y devtoolset-4-gcc* && \
+    yum install -y devtoolset-4-gcc* --nogpgcheck && \
     scl enable devtoolset-4 'bash'
 
 
@@ -172,4 +172,4 @@ HEALTHCHECK --interval=15s --timeout=5s \
     CMD  fs_cli -x status | grep -q ^UP || exit 1
 
 # USER freeswitch
-CMD ["/usr/bin/freeswitch", "-nc", "-nf", "-nonat"]
+CMD ["/usr/bin/freeswitch", "-nf", "-nonat"]
