@@ -53,13 +53,12 @@
     module="mod_siren"/>-->
 
     <!-- File Format Interfaces -->
-    <load
-      module="mod_sndfile" />
+    <load module="mod_sndfile" />
     <load module="mod_native_file" />
     <load module="mod_local_stream" />
-    <load
-      module="mod_tone_stream" />G <!-- Timers -->
+    <load module="mod_tone_stream" />
 
+    <!-- Timers -->
     <!-- Languages -->
     <!-- <load module="mod_perl"/> -->
     <load module="mod_lua" />
