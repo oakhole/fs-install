@@ -2,7 +2,7 @@ FROM ghcr.io/patrickbaus/freeswitch-docker
 
 # 安装必要的依赖
 RUN apk update && \
-    apk add --no-cache lua5.3-cjson lua5.3-socket
+    apk add --no-cache lua5.3-cjson lua5.3-sec lua5.3-socket
 
 # 创建必要的目录
 RUN mkdir -p /home/freeswitch/log /home/freeswitch/records
