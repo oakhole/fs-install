@@ -10,14 +10,15 @@ sudo apt install -y git build-essential autoconf automake libtool libtool-bin \
     pkg-config libssl-dev zlib1g-dev libncurses5-dev libncursesw5-dev \
     libjpeg-dev libsqlite3-dev libcurl4-openssl-dev libpcre3-dev \
     libspeex-dev libspeexdsp-dev libldns-dev libedit-dev \
-    liblua5.2-dev libopus-dev cmake uuid-dev libsndfile1-dev \
+    libpq-dev libopus-dev cmake uuid-dev libsndfile1-dev \
     libshout3-dev libmpg123-dev libmp3lame-dev \
-    libtiff-dev nasm uuid-dev
+    libtiff-dev nasm uuid-dev lua5.3 lua-json lua-socket lua-sec
 
 # --- 2. 编译核心依赖 ---
 cd /usr/src
 
 # Sofia-SIP
+sudo git config --global http.sslVerify false
 sudo git clone https://gh-proxy.org/https://github.com/freeswitch/sofia-sip.git
 cd sofia-sip && sudo ./bootstrap.sh && sudo ./configure && sudo make -j`nproc` && sudo make install
 cd ..
@@ -34,8 +35,17 @@ cd ..
 sudo git clone -b v1.10.12 https://gh-proxy.org/https://github.com/signalwire/freeswitch.git
 cd freeswitch
 sudo ./bootstrap.sh -j
+
+# 预先禁用部分模块以避免编译错误（可根据需要调整）
+sudo sed -i 's/^applications\/mod_av$/#applications\/mod_av/g' modules.conf \
+    && sed -i 's/^endpoints\/mod_verto$/#endpoints\/mod_verto/g' modules.conf \
+    && sed -i 's/^applications\/mod_signalwire$/#applications\/mod_signalwire/g' modules.conf \
+    && sed -i 's/^#formats\/mod_shout$/formats\/mod_shout/g' modules.conf
+
+# sed -i 's/<!--<load module="mod_shout"\/>-->/<load module="mod_shout"\/>/g' modules.conf.xml
+
 # 显式注入 -luuid 解决链接失败问题
-sudo ./configure LIBS="-luuid"
+sudo ./configure LIBS="-luuid" --with-gnu-ld --with-openssl --enable-zrtp --enable-system-lua
 sudo make -j`nproc`
 sudo make install
 sudo make cd-sounds-install cd-moh-install
