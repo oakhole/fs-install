@@ -75,4 +75,4 @@ RUN ln -s /usr/local/freeswitch/bin/fs_cli /usr/bin/fs_cli
 WORKDIR /usr/local/freeswitch/bin
 USER freeswitch
 
-CMD ["./freeswitch", "-nf"]
+CMD ["./freeswitch", "-nf", "-nonat"]
