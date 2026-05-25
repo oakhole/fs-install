@@ -50,7 +50,7 @@ ENV DEBIAN_FRONTEND=noninteractive
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
     libtiff6 libssl3 libsqlite3-0 libcurl4 libpcre3 libedit2 \
-    libspeex1 libspeexdsp1 libldns3 libopus0 libsndfile1 \
+    libspeex1 libspeexdsp1 libldns3 libopus0 libsndfile1 ffmpeg \
     libshout3 libmpg123-0 libmp3lame0 liblua5.3-0 lua5.3 lua-json lua-socket lua-sec \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
