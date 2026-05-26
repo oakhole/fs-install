@@ -75,4 +75,11 @@ RUN ln -s /usr/local/freeswitch/bin/fs_cli /usr/bin/fs_cli
 WORKDIR /usr/local/freeswitch/bin
 USER freeswitch
 
+
+EXPOSE 8021/tcp
+EXPOSE 5060/tcp 5060/udp 5080/tcp 5080/udp
+
+HEALTHCHECK --interval=15s --timeout=5s \
+    CMD  fs_cli -x status | grep -q ^UP || exit 1
+
 CMD ["./freeswitch", "-nf", "-nonat"]
