@@ -12,7 +12,7 @@ sudo apt install -y git build-essential autoconf automake libtool libtool-bin \
     libspeex-dev libspeexdsp-dev libldns-dev libedit-dev \
     libpq-dev libopus-dev cmake uuid-dev libsndfile1-dev \
     libshout3-dev libmpg123-dev libmp3lame-dev \
-    libtiff-dev nasm uuid-dev lua5.3 lua-json lua-socket lua-sec
+    libtiff-dev nasm uuid-dev lua5.3 liblua5.3-dev lua-json lua-socket lua-sec
 
 # --- 2. 编译核心依赖 ---
 cd /usr/src
@@ -74,7 +74,7 @@ User=freeswitch
 Group=freeswitch
 Environment="LD_LIBRARY_PATH=/usr/local/lib:/usr/local/freeswitch/lib"
 ExecStartPre=/usr/bin/chown -R freeswitch:freeswitch /usr/local/freeswitch
-ExecStart=/usr/local/freeswitch/bin/freeswitch -u freeswitch -g freeswitch -ncwait
+ExecStart=/usr/local/freeswitch/bin/freeswitch -u freeswitch -g freeswitch -nonat -ncwait
 Priority=-10
 LimitCORE=infinity
 LimitNOFILE=100000

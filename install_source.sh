@@ -93,7 +93,7 @@ echo 'LOCAL_LDFLAGS=-L$(AV)/lib -lavcodec -lavformat -lavutil -lswscale' >>/usr/
 echo 'LOCAL_OBJS=avcodec.o avformat.o' >>/usr/local/src/freeswitch/src/mod/applications/mod_av/Makefile
 echo 'include ../../../../build/modmake.rules' >>/usr/local/src/freeswitch/src/mod/applications/mod_av/Makefile
 
-make
+make -j$(nproc)
 make -j install
 make -j cd-sounds-install
 make -j cd-moh-install
